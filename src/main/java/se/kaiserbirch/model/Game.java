@@ -26,5 +26,9 @@ public class Game implements GameInterface {
     @Override
     public void play(int row, int column, State state){
         board.play(row,column,state);
+        State whoHasWon = Logic.checkWin(board.getBoard());
+        if(whoHasWon != State.BLANK){
+            System.out.println(whoHasWon + " has Won!");
+        }
     }
 }

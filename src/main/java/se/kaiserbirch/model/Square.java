@@ -11,4 +11,7 @@ public class Square {
         return state.toString();
     }
 
+    public State getState() {
+        return state;
+    }
 }
