@@ -2,20 +2,20 @@ package se.kaiserbirch.model;
 
 public class Game implements GameInterface {
     Board board;
-    public Game(int rows, int columns){
-        board = new Board(rows,columns);
+    public Game(int width){
+        board = new Board(width);
     }
 
     @Override
     public void reset(){
-        board.reset();
+        board.init();
     }
 
     public void showBoard(){
         StringBuilder stringBuilder = new StringBuilder();
-        for (Square[] row: board.getBoard()) {
-            for (Square square:row) {
-                stringBuilder.append(square);
+        for (Mark[] row: board.getBoard()) {
+            for (Mark mark:row) {
+                stringBuilder.append(mark);
                 stringBuilder.append(" ");
             }
             stringBuilder.append('\n');
@@ -24,11 +24,7 @@ public class Game implements GameInterface {
     }
 
     @Override
-    public void play(int row, int column, State state){
-        board.play(row,column,state);
-        State whoHasWon = Logic.checkWin(board.getBoard());
-        if(whoHasWon != State.BLANK){
-            System.out.println(whoHasWon + " has Won!");
-        }
+    public void play(int row, int column){
+        board.placeMark(row,column);
     }
 }
