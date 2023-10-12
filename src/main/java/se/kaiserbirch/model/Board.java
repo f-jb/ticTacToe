@@ -85,4 +85,8 @@ public class Board {
     public void setMarkAt(int row, int column, Mark newMark) {
         board[row][column] = newMark;
     }
+
+    public boolean isMarkedTile(int row, int column) {
+        return board[row][column].isMarked();
+    }
 }
