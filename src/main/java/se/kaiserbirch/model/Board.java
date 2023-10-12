@@ -9,16 +9,16 @@ public class Board {
     private boolean crossTurn, gameOver;
     private int availableMoves;
 
-    public Board(int boardWidth){
+    public Board(int boardWidth) {
         this.boardWidth = boardWidth;
         this.crossTurn = true;
-        this.gameOver =false;
+        this.gameOver = false;
         this.winningMark = BLANK;
         availableMoves = boardWidth * boardWidth;
         init();
     }
 
-    protected void init(){
+    protected void init() {
         this.board = new Mark[boardWidth][boardWidth];
         for (int i = 0; i < boardWidth; i++) {
             for (int j = 0; j < boardWidth; j++) {
@@ -28,7 +28,7 @@ public class Board {
     }
 
     protected boolean placeMark(int row, int column) {
-        if( row < 0 || row >= boardWidth || column < 0 || column >= boardWidth || isTileMarked(row, column) || gameOver){
+        if (row < 0 || row >= boardWidth || column < 0 || column >= boardWidth || isTileMarked(row, column) || gameOver) {
             return false;
         }
         availableMoves--;
@@ -36,11 +36,6 @@ public class Board {
         togglePlayer();
         Logic.checkWin(this, row, column);
         return true;
-    }
-
-
-    protected void setWinningMark(Mark winningMark) {
-        this.winningMark = winningMark;
     }
 
     protected void setGameOver() {
@@ -55,7 +50,7 @@ public class Board {
         crossTurn = !crossTurn;
     }
 
-    private boolean isTileMarked(int row, int col) {
+    public boolean isTileMarked(int row, int col) {
         return board[row][col].isMarked();
     }
 
@@ -82,11 +77,13 @@ public class Board {
     public Mark getWinningMark() {
         return winningMark;
     }
+
+    protected void setWinningMark(Mark winningMark) {
+        this.winningMark = winningMark;
+    }
+
     public void setMarkAt(int row, int column, Mark newMark) {
         board[row][column] = newMark;
     }
 
-    public boolean isMarkedTile(int row, int column) {
-        return board[row][column].isMarked();
-    }
 }

@@ -15,7 +15,7 @@ public class MinMax {
             int largestValue = Integer.MIN_VALUE;
            for (int row = 0; row < board.getWidth(); row++) {
                for (int column = 0; column < board.getWidth(); column++) {
-                   if (!board.isMarkedTile(row, column)) {
+                   if (!board.isTileMarked(row, column)) {
                        board.setMarkAt(row, column, CROSS);
                        int moveValue = minMax(board, MAX_DEPTH, true);
                        board.setMarkAt(row, column, BLANK);
@@ -32,7 +32,7 @@ public class MinMax {
            int smallestValue = Integer.MAX_VALUE;
            for (int row = 0; row < board.getWidth(); row++) {
                for (int column = 0; column < board.getWidth(); column++) {
-                   if (!board.isMarkedTile(row, column)) {
+                   if (!board.isTileMarked(row, column)) {
                        board.setMarkAt(row, column, CIRCLE);
                        int moveValue = minMax(board, MAX_DEPTH, false);
                        board.setMarkAt(row, column, BLANK);
@@ -69,7 +69,7 @@ public class MinMax {
             value = Integer.MIN_VALUE;
             for (int row = 0; row < board.getWidth(); row++) {
                 for (int column = 0; column < board.getWidth(); column++) {
-                    if (!board.isMarkedTile(row, column)) {
+                    if (!board.isTileMarked(row, column)) {
                         board.setMarkAt(row, column, CROSS);
                         value = Math.max(value, minMax(board, depth - 1, false));
                         board.setMarkAt(row, column, BLANK);
@@ -79,8 +79,8 @@ public class MinMax {
         } else {
             value = Integer.MAX_VALUE;
             for (int row = 0; row < board.getWidth(); row++) {
-                for (int column = 0; column > board.getWidth(); column++) {
-                    if (!board.isMarkedTile(row, column)) {
+                for (int column = 0; column < board.getWidth(); column++) {
+                    if (!board.isTileMarked(row, column)) {
                         board.setMarkAt(row, column, CIRCLE);
                         value = Math.min(value, minMax(board, depth - 1, true));
                         board.setMarkAt(row, column, BLANK);

@@ -69,9 +69,6 @@ public class Logic {
         }
 
         winningMark = checkLowerLeftToUpperRightWin(board,boardWidth);
-        if(winningMark != BLANK){
-            return winningMark;
-        }
 
         return winningMark;
     }
@@ -82,8 +79,8 @@ public class Logic {
         Mark winningMark;
 
         // Check rows wins
-        for (int iterColumn = 0; iterColumn < boardWidth; iterColumn++) {
-            rowSum += board.getMarkAt(row, iterColumn).getMark();
+        for (int iterationColumn = 0; iterationColumn < boardWidth; iterationColumn++) {
+            rowSum += board.getMarkAt(row, iterationColumn).getMark();
         }
         winningMark = calcWinner(rowSum, boardWidth);
         if (winningMark != BLANK) {
@@ -94,8 +91,8 @@ public class Logic {
 
         // Check columns wins
         rowSum = 0;
-        for (int iterRow = 0; iterRow < boardWidth; iterRow++) {
-            rowSum += board.getMarkAt(iterRow, column).getMark();
+        for (int iterationRow = 0; iterationRow < boardWidth; iterationRow++) {
+            rowSum += board.getMarkAt(iterationRow, column).getMark();
         }
         winningMark = calcWinner(rowSum, boardWidth);
         if (winningMark != BLANK) {

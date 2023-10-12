@@ -3,7 +3,7 @@ package se.kaiserbirch.model;
 import se.kaiserbirch.ai.MinMax;
 
 public class Game implements GameInterface {
-    Board board;
+    final Board board;
     public Game(int width){
         board = new Board(width);
     }

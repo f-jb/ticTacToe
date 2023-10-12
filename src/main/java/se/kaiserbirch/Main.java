@@ -1,11 +1,7 @@
 package se.kaiserbirch;
 
-import se.kaiserbirch.ai.MinMax;
-import se.kaiserbirch.model.Board;
 import se.kaiserbirch.model.Game;
-import se.kaiserbirch.model.Mark;
 
-import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
