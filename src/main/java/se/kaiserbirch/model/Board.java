@@ -34,75 +34,20 @@ public class Board {
         availableMoves--;
         board[row][column] = crossTurn ? CROSS : CIRCLE;
         togglePlayer();
-        checkWin(row, column);
+        Logic.checkWin(this, row, column);
         return true;
     }
-    void checkWin(int row, int column){
-        int rowSum = 0;
-        // check rows wins
-        for (int iterColumn = 0; iterColumn < boardWidth; iterColumn++) {
-            rowSum += getMarkAt(row,iterColumn).getMark();
-        }
-        if(calcWinner(rowSum) != BLANK){
-            System.out.println(winningMark + " has won via row: " + row + " column: " + column);
-            return;
-        }
 
 
-        // check columns wins
-        rowSum = 0;
-        for (int iterRow = 0; iterRow < boardWidth; iterRow++) {
-            rowSum += getMarkAt(iterRow,column).getMark();
-        }
-        if(calcWinner(rowSum) != BLANK){
-            System.out.println(winningMark + " has won via row: " + row + " column: " + column);
-            return;
-        }
-
-
-        //check diagonal
-        rowSum = 0;
-        for (int i = 0; i< boardWidth; i++) {
-            rowSum += getMarkAt(i,i).getMark();
-        }
-        if(calcWinner(rowSum) != BLANK) {
-            System.out.println(winningMark + " has won via row: " + row + " column: " + column);
-            return;
-        }
-
-        rowSum = 0;
-        int indexMax = boardWidth - 1;
-        for (int i = 0; i< indexMax; i++) {
-            rowSum += getMarkAt(i,indexMax - i).getMark();
-        }
-        if(calcWinner(rowSum) != BLANK) {
-            System.out.println(winningMark + " has won via row: " + row + " column: " + column);
-            return;
-        }
-        if(!anyAvailableMoves()){
-            gameOver = true;
-            System.out.println("tie");
-        }
-
-
+    public void setWinningMark(Mark winningMark) {
+        this.winningMark = winningMark;
     }
 
-    private Mark calcWinner(int rowSum) {
-        int crossWin = CROSS.getMark() * boardWidth;
-        int circleWin = CIRCLE.getMark() * boardWidth;
-        if(rowSum == crossWin){
-            gameOver =true;
-            winningMark = CROSS;
-            return CROSS;
-        } else if(rowSum == circleWin){
-            gameOver =true;
-            winningMark = CIRCLE;
-            return CIRCLE;
-        }
-        return BLANK;
+    public void setGameOver() {
+        this.gameOver = true;
     }
 
-    private Mark getMarkAt(int row, int column) {
+    protected Mark getMarkAt(int row, int column) {
         return board[row][column];
     }
 
