@@ -27,7 +27,7 @@ public class Board {
         }
     }
 
-    public boolean placeMark(int row, int column) {
+    protected boolean placeMark(int row, int column) {
         if( row < 0 || row >= boardWidth || column < 0 || column >= boardWidth || isTileMarked(row, column) || gameOver){
             return false;
         }
@@ -39,11 +39,11 @@ public class Board {
     }
 
 
-    public void setWinningMark(Mark winningMark) {
+    protected void setWinningMark(Mark winningMark) {
         this.winningMark = winningMark;
     }
 
-    public void setGameOver() {
+    protected void setGameOver() {
         this.gameOver = true;
     }
 

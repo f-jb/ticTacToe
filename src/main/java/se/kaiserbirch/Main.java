@@ -17,7 +17,6 @@ public class Main {
         game.play(0,2);
         game.play(1,2);
         game.play(game.getBestMove());
-        game.showBoard();
 
 
 

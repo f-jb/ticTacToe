@@ -7,33 +7,48 @@ import se.kaiserbirch.model.Mark;
 import static se.kaiserbirch.model.Mark.*;
 
 public class MinMax {
-    static final int MAX_DEPTH = 100;
+    static final int MAX_DEPTH = 6;
     public static int[] getBestMove(Board board){
-        boolean crossTurn = board.isCrossTurn();
         int[] bestMove = new int[]{-1,-1};
 
-
-
-        int bestValue = Integer.MIN_VALUE;
-        for (int row = 0; row<board.getWidth(); row++){
-            for (int column = 0; column<board.getWidth(); column++){
-                if(!board.isMarkedTile(row,column)){
-                    board.setMarkAt(row,column, CROSS);
-                    int moveValue = miniMax(board,MAX_DEPTH, true);
-                    board.setMarkAt(row,column, BLANK);
-                    if(moveValue> bestValue){
-                        bestMove[0] = row;
-                        bestMove[1] = column;
-                        bestValue = moveValue;
-                    }
-                }
-            }
+        if( board.isCrossTurn()) {
+            int largestValue = Integer.MIN_VALUE;
+           for (int row = 0; row < board.getWidth(); row++) {
+               for (int column = 0; column < board.getWidth(); column++) {
+                   if (!board.isMarkedTile(row, column)) {
+                       board.setMarkAt(row, column, CROSS);
+                       int moveValue = minMax(board, MAX_DEPTH, true);
+                       board.setMarkAt(row, column, BLANK);
+                       if (moveValue > largestValue) {
+                           bestMove[0] = row;
+                           bestMove[1] = column;
+                           largestValue= moveValue;
+                       }
+                   }
+               }
+           }
         }
-        System.out.println(bestValue);
+       else {
+           int smallestValue = Integer.MAX_VALUE;
+           for (int row = 0; row < board.getWidth(); row++) {
+               for (int column = 0; column < board.getWidth(); column++) {
+                   if (!board.isMarkedTile(row, column)) {
+                       board.setMarkAt(row, column, CIRCLE);
+                       int moveValue = minMax(board, MAX_DEPTH, false);
+                       board.setMarkAt(row, column, BLANK);
+                       if (moveValue < smallestValue) {
+                           bestMove[0] = row;
+                           bestMove[1] = column;
+                           smallestValue= moveValue;
+                       }
+                   }
+               }
+           }
+        }
         return bestMove;
     }
 
-    public static int evaluateBoard(Board board) {
+    private static int evaluateBoard(Board board) {
         Mark winningMark = Logic.checkWin(board);
         if (winningMark == CROSS) {
             return 1;
@@ -44,7 +59,7 @@ public class MinMax {
         }
     }
 
-    static int miniMax(Board board, int depth, boolean maximizingPlayer) {
+    private static int minMax(Board board, int depth, boolean maximizingPlayer) {
         int boardVal = evaluateBoard(board);
         if (Math.abs(boardVal) == 1 || depth == 0 || board.anyAvailableMoves()) {
             return boardVal;
@@ -56,18 +71,18 @@ public class MinMax {
                 for (int column = 0; column < board.getWidth(); column++) {
                     if (!board.isMarkedTile(row, column)) {
                         board.setMarkAt(row, column, CROSS);
-                        value = Math.max(value, miniMax(board, depth - 1, false));
+                        value = Math.max(value, minMax(board, depth - 1, false));
                         board.setMarkAt(row, column, BLANK);
                     }
                 }
             }
         } else {
             value = Integer.MAX_VALUE;
-            for (int row = 0; row > board.getWidth(); row++) {
+            for (int row = 0; row < board.getWidth(); row++) {
                 for (int column = 0; column > board.getWidth(); column++) {
                     if (!board.isMarkedTile(row, column)) {
                         board.setMarkAt(row, column, CIRCLE);
-                        value = Math.min(value, miniMax(board, depth - 1, true));
+                        value = Math.min(value, minMax(board, depth - 1, true));
                         board.setMarkAt(row, column, BLANK);
                     }
                 }

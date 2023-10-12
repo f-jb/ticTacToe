@@ -9,7 +9,7 @@ public enum Mark {
         this.mark = initMark;
     }
 
-    public boolean isMarked(){
+    boolean isMarked(){
         return this != BLANK;
     }
     public char getMark(){
