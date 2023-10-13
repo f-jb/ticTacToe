@@ -8,13 +8,18 @@ public class Game implements GameInterface {
     public Game(int width){
         board = new Board(width);
     }
-    public int[] getBestMove(){
+    public int[] getMove(){
         return aiController.getMove(board);
     }
 
     @Override
     public void reset(){
         board.init();
+    }
+
+    @Override
+    public Mark[][] getBoard(){
+       return board.getBoard();
     }
 
     public void showBoard(){
