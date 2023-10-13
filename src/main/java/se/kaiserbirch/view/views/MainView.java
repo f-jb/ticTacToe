@@ -9,14 +9,17 @@ import java.awt.event.ActionListener;
 public class MainView extends JPanel {
     JPanel panel = this;
     ActionListener playButtonAction;
+    int[] recommendedMove;
 
     public MainView(Builder builder){
         Mark[][] board = builder.board;
         panel.setLayout(new GridBagLayout());
+        this.recommendedMove = builder.recommendedMove;
         this.playButtonAction = builder.playButtonAction;
         int gridX = 0;
         int gridY = 0;
         GridBagConstraints gridBagConstraints = new GridBagConstraints();
+        gridBagConstraints.insets = new Insets(10,10,10,10);
         gridBagConstraints.gridx = gridX;
         gridBagConstraints.gridy = gridY;
         gridBagConstraints.weightx =1;
@@ -29,6 +32,9 @@ public class MainView extends JPanel {
                 button.setFont(new Font("Arial", Font.BOLD,80));
                 if(square.isMarked()){
                     button.setEnabled(false);
+                }
+                if(recommendedMove[0] == gridY && recommendedMove[1] == gridX){
+                    button.setBackground(Color.GREEN);
                 }
                 button.putClientProperty("row", gridY);
                 button.putClientProperty("column", gridX);
@@ -80,8 +86,13 @@ public class MainView extends JPanel {
         repaint();
     }
     public static class Builder{
+        private int[] recommendedMove;
         private Mark[][] board;
         private ActionListener playButtonAction;
+        public Builder setRecommendedMove(int[] recommendedMove){
+            this.recommendedMove = recommendedMove;
+            return this;
+        }
         public Builder setBoard(Mark[][] board){
             this.board = board;
             return this;

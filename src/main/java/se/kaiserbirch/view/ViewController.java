@@ -2,6 +2,7 @@ package se.kaiserbirch.view;
 
 import se.kaiserbirch.controller.Controller;
 import se.kaiserbirch.controller.UiState;
+import se.kaiserbirch.model.Mark;
 import se.kaiserbirch.view.views.MainView;
 
 import javax.swing.*;
@@ -32,6 +33,7 @@ public class ViewController implements Flow.Subscriber<UiState> {
         this.mainView = new MainView.Builder()
                 .setPlayAction(this::onButtonClick)
                 .setBoard(currentUiState.getBoard())
+                .setRecommendedMove(currentUiState.getRecommendedMove())
                 .build();
 
         frame.setLayout(new GridBagLayout());
@@ -52,10 +54,21 @@ public class ViewController implements Flow.Subscriber<UiState> {
     @Override
     public void onNext(UiState uiState) {
         this.currentUiState = uiState;
-        MainView updatedMainView = new MainView.Builder().setBoard(uiState.getBoard()).setPlayAction(this::onButtonClick).build();
+        MainView updatedMainView = new MainView.Builder()
+                .setBoard(uiState.getBoard())
+                .setPlayAction(this::onButtonClick)
+                .setRecommendedMove(uiState.getRecommendedMove())
+                .build();
         frame.setContentPane(updatedMainView);
         frame.validate();
         frame.repaint();
+        if(uiState.isGameOver()){
+            if(uiState.getWinningMark() == Mark.BLANK) {
+                JOptionPane.showMessageDialog(null, "It is a tie.");
+            } else {
+                JOptionPane.showMessageDialog(null, uiState.getWinningMark() + " has won!");
+            }
+        }
         subscription.request(1);
     }
 

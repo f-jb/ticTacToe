@@ -44,6 +44,8 @@ public class Controller implements Flow.Publisher<UiState>, ControllerInterface 
         this.currentUiState = new UiState.Builder()
                 .setBoard(currentGame.getBoard())
                 .setRecommendedMove(currentGame.getMove())
+                .setGameOver(currentGame.isGameOver())
+                .setWinningMark(currentGame.getWinningMark())
                 .build();
     }
 

@@ -4,6 +4,7 @@ import se.kaiserbirch.model.ai.AiController;
 
 public class Game implements GameInterface {
     final Board board;
+    final boolean versusComputer = true;
     final AiController aiController = new AiController();
     public Game(int width){
         board = new Board(width);
@@ -40,6 +41,10 @@ public class Game implements GameInterface {
     public void play(int row, int column){
         if(!board.isGameOver()) {
             board.placeMark(row, column);
+            if(versusComputer){
+                board.placeMark(getMove());
+
+            }
             showBoard();
         }
         if(board.isGameOver()){
@@ -57,4 +62,11 @@ public class Game implements GameInterface {
         }
     }
 
+    public boolean isGameOver() {
+        return board.isGameOver();
+    }
+
+    public Mark getWinningMark() {
+        return board.getWinningMark();
+    }
 }

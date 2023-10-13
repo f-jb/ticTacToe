@@ -86,4 +86,7 @@ public class Board {
         board[row][column] = newMark;
     }
 
+    public void placeMark(int[] move) {
+        placeMark(move[0], move[1]);
+    }
 }
