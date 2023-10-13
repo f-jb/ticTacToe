@@ -8,14 +8,9 @@ import java.util.concurrent.SubmissionPublisher;
 
 public class Controller implements Flow.Publisher<UiState>, ControllerInterface {
     private UiState currentUiState;
-    private final Game currentGame;
+    private Game currentGame;
     private final SubmissionPublisher<UiState> submissionPublisher = new SubmissionPublisher<>();
-    Controller(){
-        this.currentGame = new Game(3);
-        this.currentUiState = new UiState.Builder()
-                .setBoard(currentGame.getBoard())
-                .setRecommendedMove(currentGame.getMove())
-                .build();
+    public Controller(){
     }
 
     @Override
@@ -30,14 +25,29 @@ public class Controller implements Flow.Publisher<UiState>, ControllerInterface 
     }
 
     @Override
+    public void newGame(int width){
+        this.currentGame = new Game(width);
+        this.currentUiState = new UiState.Builder()
+                .setBoard(currentGame.getBoard())
+                .setRecommendedMove(currentGame.getMove())
+                .build();
+    }
+
+    @Override
     public void reset() {
         currentGame.reset();
     }
+
+
 
     private void updateCurrentUiState(){
         this.currentUiState = new UiState.Builder()
                 .setBoard(currentGame.getBoard())
                 .setRecommendedMove(currentGame.getMove())
                 .build();
+    }
+
+    public UiState getUiState() {
+        return currentUiState;
     }
 }
