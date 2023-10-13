@@ -1,14 +1,15 @@
 package se.kaiserbirch.model;
 
-import se.kaiserbirch.ai.MinMax;
+import se.kaiserbirch.model.ai.AiController;
 
 public class Game implements GameInterface {
     final Board board;
+    final AiController aiController = new AiController();
     public Game(int width){
         board = new Board(width);
     }
     public int[] getBestMove(){
-        return MinMax.getBestMove(board);
+        return aiController.getMove(board);
     }
 
     @Override

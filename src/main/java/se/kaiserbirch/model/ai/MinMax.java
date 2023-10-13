@@ -1,4 +1,4 @@
-package se.kaiserbirch.ai;
+package se.kaiserbirch.model.ai;
 
 import se.kaiserbirch.model.Board;
 import se.kaiserbirch.model.Logic;
@@ -6,9 +6,9 @@ import se.kaiserbirch.model.Mark;
 
 import static se.kaiserbirch.model.Mark.*;
 
-public class MinMax {
-    static final int MAX_DEPTH = 6;
-    public static int[] getBestMove(Board board){
+class MinMax {
+    private static final int MAX_DEPTH = 6;
+    protected static int[] getBestMove(Board board){
         int[] bestMove = new int[]{-1,-1};
 
         if( board.isCrossTurn()) {
