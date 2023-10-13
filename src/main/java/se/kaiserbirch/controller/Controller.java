@@ -31,11 +31,14 @@ public class Controller implements Flow.Publisher<UiState>, ControllerInterface 
                 .setBoard(currentGame.getBoard())
                 .setRecommendedMove(currentGame.getMove())
                 .build();
+        submissionPublisher.submit(currentUiState);
     }
 
     @Override
     public void reset() {
         currentGame.reset();
+        updateCurrentUiState();
+        submissionPublisher.submit(currentUiState);
     }
 
 

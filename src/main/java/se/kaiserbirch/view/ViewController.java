@@ -36,12 +36,34 @@ public class ViewController implements Flow.Subscriber<UiState> {
                 .setRecommendedMove(currentUiState.getRecommendedMove())
                 .build();
 
-        frame.setLayout(new GridBagLayout());
+        JMenuBar jMenuBar = getMenuBar();
+        frame.setJMenuBar(jMenuBar);
+
+//        frame.setLayout(new GridBagLayout());
         frame.setContentPane(mainView);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setVisible(true);
         frame.pack();
 
+    }
+
+    private JMenuBar getMenuBar() {
+        JMenuBar jMenuBar = new JMenuBar();
+        JMenu size = new JMenu("Size");
+        JMenuItem smallSize = new JMenuItem("Small");
+        JMenuItem mediumSize = new JMenuItem("Medium");
+        JMenuItem largeSize = new JMenuItem("Large");
+        smallSize.addActionListener(e -> controller.newGame(3));
+        mediumSize.addActionListener(e -> controller.newGame(4));
+        largeSize.addActionListener(e -> controller.newGame(5));
+        JMenuItem restart = new JMenuItem("Restart");
+        restart.addActionListener(e -> controller.reset());
+        size.add(smallSize);
+        size.add(mediumSize);
+        size.add(largeSize);
+        jMenuBar.add(restart);
+        jMenuBar.add(size);
+        return jMenuBar;
     }
 
 

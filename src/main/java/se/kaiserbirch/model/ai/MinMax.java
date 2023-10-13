@@ -7,7 +7,7 @@ import se.kaiserbirch.model.Mark;
 import static se.kaiserbirch.model.Mark.*;
 
 class MinMax {
-    private static final int MAX_DEPTH = 6;
+    private static final int MAX_DEPTH = Integer.MAX_VALUE;
     protected static int[] getBestMove(Board board){
         int[] bestMove = new int[]{-1,-1};
 
