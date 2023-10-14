@@ -1,21 +1,19 @@
 package se.kaiserbirch.view;
 
 import se.kaiserbirch.controller.Controller;
+import se.kaiserbirch.controller.ControllerInterface;
 import se.kaiserbirch.controller.UiState;
 import se.kaiserbirch.model.Mark;
 import se.kaiserbirch.view.views.MainView;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.concurrent.Flow;
 
 public class ViewController implements Flow.Subscriber<UiState> {
-    private Controller controller;
-    JFrame frame = new JFrame("Tic-Tac-Toe");
+    private final ControllerInterface controller;
+    final JFrame frame = new JFrame("Tic-Tac-Toe");
     private UiState currentUiState;
-    private MainView mainView;
     private Flow.Subscription subscription;
     public ViewController(Controller controller){
         this.controller = controller;
@@ -30,7 +28,7 @@ public class ViewController implements Flow.Subscriber<UiState> {
     }
 
     public void init() {
-        this.mainView = new MainView.Builder()
+        MainView mainView = new MainView.Builder()
                 .setPlayAction(this::onButtonClick)
                 .setBoard(currentUiState.getBoard())
                 .setRecommendedMove(currentUiState.getRecommendedMove())

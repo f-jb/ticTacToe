@@ -1,6 +1,7 @@
 package se.kaiserbirch.controller;
 
 import se.kaiserbirch.model.Game;
+import se.kaiserbirch.model.GameInterface;
 
 import java.util.concurrent.Flow;
 import java.util.concurrent.SubmissionPublisher;
@@ -8,7 +9,7 @@ import java.util.concurrent.SubmissionPublisher;
 
 public class Controller implements Flow.Publisher<UiState>, ControllerInterface {
     private UiState currentUiState;
-    private Game currentGame;
+    private GameInterface currentGame;
     private final SubmissionPublisher<UiState> submissionPublisher = new SubmissionPublisher<>();
 
     @Override

@@ -5,4 +5,10 @@ public interface GameInterface {
 
     void play(int row, int column);
     Mark[][] getBoard();
+
+    int[] getMove();
+
+    boolean isGameOver();
+
+    Mark getWinningMark();
 }

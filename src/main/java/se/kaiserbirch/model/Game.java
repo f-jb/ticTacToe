@@ -1,14 +1,16 @@
 package se.kaiserbirch.model;
 
 import se.kaiserbirch.model.ai.AiController;
+import se.kaiserbirch.model.ai.AiControllerInterface;
 
 public class Game implements GameInterface {
     final Board board;
     final boolean versusComputer = true;
-    final AiController aiController = new AiController();
+    final AiControllerInterface aiController = new AiController();
     public Game(int width){
         board = new Board(width);
     }
+    @Override
     public int[] getMove(){
         return aiController.getMove(board);
     }
@@ -33,10 +35,12 @@ public class Game implements GameInterface {
         }
     }
 
+    @Override
     public boolean isGameOver() {
         return board.isGameOver();
     }
 
+    @Override
     public Mark getWinningMark() {
         return board.getWinningMark();
     }
