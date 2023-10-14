@@ -7,15 +7,12 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class MainView extends JPanel {
-    JPanel panel = this;
-    ActionListener playButtonAction;
-    int[] recommendedMove;
 
     public MainView(Builder builder){
         Mark[][] board = builder.board;
         setLayout(new GridBagLayout());
-        this.recommendedMove = builder.recommendedMove;
-        this.playButtonAction = builder.playButtonAction;
+        int[] recommendedMove = builder.recommendedMove;
+        ActionListener playButtonAction = builder.playButtonAction;
         int gridX = 0;
         int gridY = 0;
         GridBagConstraints gridBagConstraints = new GridBagConstraints();

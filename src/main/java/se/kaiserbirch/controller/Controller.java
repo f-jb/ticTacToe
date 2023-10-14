@@ -10,8 +10,6 @@ public class Controller implements Flow.Publisher<UiState>, ControllerInterface 
     private UiState currentUiState;
     private Game currentGame;
     private final SubmissionPublisher<UiState> submissionPublisher = new SubmissionPublisher<>();
-    public Controller(){
-    }
 
     @Override
     public void subscribe(Flow.Subscriber<? super UiState> subscriber) {

@@ -2,8 +2,6 @@ package se.kaiserbirch.model.ai;
 
 import se.kaiserbirch.model.Board;
 
-import java.util.Arrays;
-
 public class AiController implements AiControllerInterface{
     Algorithm currentAlgo = Algorithm.MinMax;
     public int[] getMove(Board board){
@@ -21,7 +19,7 @@ public class AiController implements AiControllerInterface{
     }
 
     @Override
-    public String getAvailableAlgorithms() {
-        return Arrays.toString(Algorithm.values());
+    public Algorithm[] getAvailableAlgorithms() {
+        return Algorithm.values();
     }
 }

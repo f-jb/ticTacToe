@@ -23,42 +23,13 @@ public class Game implements GameInterface {
        return board.getBoard();
     }
 
-    public void showBoard(){
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("X123");
-        stringBuilder.append('\n');
-        for (Mark[] row: board.getBoard()) {
-            stringBuilder.append("1");
-            for (Mark mark:row) {
-                stringBuilder.append(mark);
-            }
-            stringBuilder.append('\n');
-        }
-        System.out.println(stringBuilder);
-    }
-
     @Override
     public void play(int row, int column){
         if(!board.isGameOver()) {
             board.placeMark(row, column);
             if(versusComputer){
                 board.placeMark(getMove());
-
             }
-            showBoard();
-        }
-        if(board.isGameOver()){
-            System.out.println(board.getWinningMark() + " has won.");
-        }
-    }
-
-    public void play(int[] choice){
-        if(!board.isGameOver()) {
-            board.placeMark(choice[0], choice[1]);
-            showBoard();
-        }
-        if(board.isGameOver()){
-            System.out.println(board.getWinningMark() + " has won.");
         }
     }
 
